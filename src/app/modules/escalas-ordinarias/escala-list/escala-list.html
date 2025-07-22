@@ -1,0 +1,118 @@
+<div class="escala-list-container">
+  <div class="page-header">
+    <h2>Escalas Ordinárias</h2>
+    <button class="btn btn-primary" routerLink="/escalas-ordinarias/form">
+      <span class="material-icons">add</span>
+      Nova Escala
+    </button>
+  </div>
+
+  <div class="filters-section">
+    <div class="filters-row">
+      <div class="form-group">
+        <label for="oficial">Oficial</label>
+        <input 
+          id="oficial"
+          type="text" 
+          [(ngModel)]="filters.oficial" 
+          placeholder="Nome do oficial"
+          class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="unidade">Unidade</label>
+        <input 
+          id="unidade"
+          type="text" 
+          [(ngModel)]="filters.unidade" 
+          placeholder="Unidade"
+          class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" [(ngModel)]="filters.status" class="form-control">
+          <option value="">Todos</option>
+          <option value="ativo">Ativo</option>
+          <option value="concluido">Concluído</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+      </div>
+      
+      <div class="form-actions">
+        <button class="btn btn-secondary" (click)="applyFilters()">
+          <span class="material-icons">search</span>
+          Filtrar
+        </button>
+        <button class="btn btn-outline" (click)="clearFilters()">
+          <span class="material-icons">clear</span>
+          Limpar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="escalas-grid" *ngIf="!isLoading && !error">
+    <div class="escalas-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Oficial</th>
+            <th>Posto</th>
+            <th>Unidade</th>
+            <th>Período</th>
+            <th>Serviço</th>
+            <th>Status</th>
+            <th>Valor</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let escala of escalas">
+            <td>{{ escala.oficial }}</td>
+            <td>{{ escala.posto }}</td>
+            <td>{{ escala.unidade }}</td>
+            <td>
+              {{ escala.dataInicio | date:'dd/MM/yyyy HH:mm' }} - 
+              {{ escala.dataFim | date:'dd/MM/yyyy HH:mm' }}
+            </td>
+            <td>{{ escala.servico }}</td>
+            <td>
+              <span class="status-badge" [class]="'status-' + escala.status">
+                {{ escala.status }}
+              </span>
+            </td>
+            <td>{{ escala.valor | currency:'BRL':'symbol':'1.2-2' }}</td>
+            <td class="actions">
+              <button class="btn-icon" [routerLink]="['/escalas-ordinarias/detail', escala.id]" title="Ver detalhes">
+                <span class="material-icons">visibility</span>
+              </button>
+              <button class="btn-icon" [routerLink]="['/escalas-ordinarias/form', escala.id]" title="Editar">
+                <span class="material-icons">edit</span>
+              </button>
+              <button class="btn-icon danger" (click)="deleteEscala(escala.id)" title="Excluir">
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="no-results" *ngIf="escalas.length === 0">
+        <span class="material-icons">search_off</span>
+        <p>Nenhuma escala encontrada</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Carregando escalas...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <span class="material-icons">error</span>
+    <p>{{ error }}</p>
+    <button class="btn btn-primary" (click)="loadEscalas()">Tentar novamente</button>
+  </div>
+</div>

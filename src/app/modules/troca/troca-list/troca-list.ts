@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-troca-list',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './troca-list.html',
   styleUrl: './troca-list.scss'
 })
-export class TrocaList {
+export class TrocaListComponent {
 
 }
