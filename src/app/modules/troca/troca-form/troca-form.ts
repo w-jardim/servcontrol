@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-troca-form',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './troca-form.html',
   styleUrl: './troca-form.scss'
 })
-export class TrocaForm {
+export class TrocaFormComponent {
 
 }

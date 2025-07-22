@@ -1,0 +1,170 @@
+<div class="escala-form-container">
+  <div class="page-header">
+    <h2>{{ isEditing ? 'Editar' : 'Nova' }} Escala Ordinária</h2>
+    <button class="btn btn-outline" (click)="cancel()">
+      <span class="material-icons">arrow_back</span>
+      Voltar
+    </button>
+  </div>
+
+  <form [formGroup]="escalaForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-section">
+      <h3>Dados do Oficial</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="oficial">Nome do Oficial *</label>
+          <input 
+            id="oficial"
+            type="text" 
+            formControlName="oficial" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('oficial')?.invalid && escalaForm.get('oficial')?.touched">
+          <div class="error-message" 
+               *ngIf="escalaForm.get('oficial')?.invalid && escalaForm.get('oficial')?.touched">
+            Nome do oficial é obrigatório
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="posto">Posto *</label>
+          <select 
+            id="posto" 
+            formControlName="posto" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('posto')?.invalid && escalaForm.get('posto')?.touched">
+            <option value="">Selecione o posto</option>
+            <option value="soldado">Soldado</option>
+            <option value="cabo">Cabo</option>
+            <option value="sargento">Sargento</option>
+            <option value="subtenente">Subtenente</option>
+            <option value="tenente">Tenente</option>
+            <option value="capitao">Capitão</option>
+            <option value="major">Major</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="matricula">Matrícula *</label>
+          <input 
+            id="matricula"
+            type="text" 
+            formControlName="matricula" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('matricula')?.invalid && escalaForm.get('matricula')?.touched">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Dados da Escala</h3>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="unidade">Unidade *</label>
+          <input 
+            id="unidade"
+            type="text" 
+            formControlName="unidade" 
+            class="form-control"
+            placeholder="Ex: 1º BPM, PMRV, etc."
+            [class.invalid]="escalaForm.get('unidade')?.invalid && escalaForm.get('unidade')?.touched">
+        </div>
+        
+        <div class="form-group">
+          <label for="servico">Tipo de Serviço *</label>
+          <select 
+            id="servico" 
+            formControlName="servico" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('servico')?.invalid && escalaForm.get('servico')?.touched">
+            <option value="">Selecione o serviço</option>
+            <option value="patrulhamento">Patrulhamento</option>
+            <option value="radio_patrulha">Rádio Patrulha</option>
+            <option value="escolta">Escolta</option>
+            <option value="seguranca_evento">Segurança de Evento</option>
+            <option value="diligencia">Diligência</option>
+            <option value="operacao_especial">Operação Especial</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="status">Status *</label>
+          <select 
+            id="status" 
+            formControlName="status" 
+            class="form-control">
+            <option value="ativo">Ativo</option>
+            <option value="concluido">Concluído</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dataInicio">Data e Hora de Início *</label>
+          <input 
+            id="dataInicio"
+            type="datetime-local" 
+            formControlName="dataInicio" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('dataInicio')?.invalid && escalaForm.get('dataInicio')?.touched">
+        </div>
+        
+        <div class="form-group">
+          <label for="dataFim">Data e Hora de Fim *</label>
+          <input 
+            id="dataFim"
+            type="datetime-local" 
+            formControlName="dataFim" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('dataFim')?.invalid && escalaForm.get('dataFim')?.touched">
+        </div>
+        
+        <div class="form-group">
+          <label for="valor">Valor (R$) *</label>
+          <input 
+            id="valor"
+            type="number" 
+            step="0.01"
+            min="0"
+            formControlName="valor" 
+            class="form-control"
+            [class.invalid]="escalaForm.get('valor')?.invalid && escalaForm.get('valor')?.touched">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label for="observacoes">Observações</label>
+          <textarea 
+            id="observacoes"
+            formControlName="observacoes" 
+            class="form-control"
+            rows="3"
+            placeholder="Observações sobre a escala (opcional)"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline" (click)="cancel()">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="escalaForm.invalid || isLoading">
+        <span class="material-icons" *ngIf="isLoading">hourglass_empty</span>
+        <span class="material-icons" *ngIf="!isLoading">save</span>
+        {{ isEditing ? 'Atualizar' : 'Salvar' }}
+      </button>
+    </div>
+  </form>
+
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>{{ isEditing ? 'Carregando escala...' : 'Salvando escala...' }}</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <span class="material-icons">error</span>
+    <p>{{ error }}</p>
+  </div>
+</div>

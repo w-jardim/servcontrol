@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-troca-detail',
+  selector: 'app-pagamento-form',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './troca-detail.html',
-  styleUrl: './troca-detail.scss'
+  template: '<h2>Formulário de Pagamento</h2>',
+  styles: []
 })
-export class TrocaDetailComponent {
-
+export class PagamentoFormComponent {
 }

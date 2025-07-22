@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-troca-detail',
+  selector: 'app-pagamento-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './troca-detail.html',
-  styleUrl: './troca-detail.scss'
+  template: '<h2>Lista de Pagamentos</h2>',
+  styles: []
 })
-export class TrocaDetailComponent {
-
+export class PagamentoListComponent {
 }

@@ -332,31 +332,40 @@ export class SidebarComponent implements OnInit {
       route: '/dashboard'
     },
     {
-      id: 'plantoes',
-      label: 'Plantões',
+      id: 'escalas-ordinarias',
+      label: 'Escalas Ordinárias',
       icon: 'schedule',
       children: [
-        { id: 'plantoes-list', label: 'Listar Plantões', icon: 'list', route: '/plantao/list' },
-        { id: 'plantoes-form', label: 'Novo Plantão', icon: 'add', route: '/plantao/form' },
-        { id: 'plantoes-calendar', label: 'Calendário', icon: 'calendar_month', route: '/plantao/calendar' }
+        { id: 'escalas-list', label: 'Listar Escalas', icon: 'list', route: '/escalas-ordinarias' },
+        { id: 'escalas-form', label: 'Nova Escala', icon: 'add', route: '/escalas-ordinarias/form' },
+        { id: 'escalas-calendar', label: 'Calendário', icon: 'calendar_month', route: '/escalas-ordinarias/calendar' }
+      ]
+    },
+    {
+      id: 'ras',
+      label: 'RAS',
+      icon: 'description',
+      children: [
+        { id: 'ras-list', label: 'Listar RAS', icon: 'list', route: '/ras' },
+        { id: 'ras-form', label: 'Novo RAS', icon: 'add', route: '/ras/form' }
       ]
     },
     {
       id: 'trocas',
-      label: 'Trocas',
+      label: 'Trocas de Plantão',
       icon: 'swap_horiz',
       children: [
-        { id: 'trocas-list', label: 'Minhas Trocas', icon: 'list', route: '/troca/list' },
-        { id: 'trocas-form', label: 'Nova Troca', icon: 'add', route: '/troca/form', badge: '2' }
+        { id: 'trocas-list', label: 'Minhas Trocas', icon: 'list', route: '/trocas' },
+        { id: 'trocas-form', label: 'Nova Troca', icon: 'add', route: '/trocas/form', badge: '2' }
       ]
     },
     {
-      id: 'financeiro',
-      label: 'Financeiro',
+      id: 'pagamentos',
+      label: 'Pagamentos',
       icon: 'payments',
       children: [
-        { id: 'financeiro-list', label: 'Pagamentos', icon: 'payment', route: '/financeiro/list' },
-        { id: 'financeiro-form', label: 'Novo Pagamento', icon: 'add', route: '/financeiro/form' }
+        { id: 'pagamentos-list', label: 'Pagamentos', icon: 'payment', route: '/pagamentos' },
+        { id: 'pagamentos-form', label: 'Novo Pagamento', icon: 'add', route: '/pagamentos/form' }
       ]
     },
     {
